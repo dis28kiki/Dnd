@@ -1,0 +1,11 @@
+{
+    "files": [
+        "Forms/form_create1.ui",
+        "Forms/form_vxod.ui",
+        "form.ui",
+        "mainwindow.py",
+        "mainwindow.ui",
+        "ui_form.py",
+        "win.py"
+    ]
+}
