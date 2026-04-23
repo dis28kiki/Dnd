@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Form3</class>
+ <widget class="QWidget" name="Form3">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(&quot;/home/dis/Загрузки/background/forest5.jpg&quot;) 0 0 0 0 stretch stretch</string>
+    <string notr="true">border-image: url(&quot;/home/dis/Документы/sharag/sh3_2/мдк 02/kod/dnd/picture/forest5.jpg&quot;) 0 0 0 0 stretch stretch</string>
    </property>
    <property name="text">
     <string/>
@@ -60,7 +60,7 @@ border-radius: 145px;</string>
     <string notr="true">
 color: rgb(14, 4, 5);
 font: 500 italic 18pt &quot;Z003 [urw]&quot;;
-background-color: rgba(193, 204, 178, 95);
+background-color: rgba(193, 204, 178, 115);
 border-radius: 205px;
 opacity: 0.5;</string>
    </property>
@@ -182,8 +182,8 @@ opacity: 0.5;</string>
     <rect>
      <x>310</x>
      <y>200</y>
-     <width>451</width>
-     <height>361</height>
+     <width>461</width>
+     <height>641</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -193,7 +193,7 @@ font: 500 italic 18pt &quot;Z003 [urw]&quot;;
 </string>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Осталось уже совсем немного. Сейчас твоя цель загрузить анкеты персонажей игроков в PDF, формате, а так же по желанию добавь анкеты неиграбельных персонажей сюжета, что могут встретиться на пути у протогонистов.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Осталось уже совсем немного. Сейчас твоя цель загрузить анкеты персонажей игроков в формате PDF. Это важный этап подготовки, ведь именно эти листы станут основой для всего дальнейшего взаимодействия. Помимо обязательных анкет игроков, ты также можешь добавить анкеты неигровых персонажей сюжета тех, кто встретится на пути у протагонистов. Это могут быть ключевые союзники, загадочные торговцы, грозные антагонисты или просто колоритные жители мира. Загружая их заранее, ты создаёшь полноценную базу действующих лиц, которая будет готова к любому повороту событий. Подготовь все листы, а программа поможет тебе структурировать их и сделать игру более плавной и захватывающей.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

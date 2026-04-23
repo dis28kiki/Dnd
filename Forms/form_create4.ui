@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Form4</class>
+ <widget class="QWidget" name="Form4">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(&quot;/home/dis/Загрузки/background/forest5.jpg&quot;) 0 0 0 0 stretch stretch</string>
+    <string notr="true">border-image: url(&quot;/home/dis/Документы/sharag/sh3_2/мдк 02/kod/dnd/picture/forest5.jpg&quot;) 0 0 0 0 stretch stretch</string>
    </property>
    <property name="text">
     <string/>

@@ -4,7 +4,6 @@
         "Forms/form_vxod.ui",
         "form.ui",
         "mainwindow.py",
-        "mainwindow.ui",
         "ui_form.py",
         "win.py"
     ]

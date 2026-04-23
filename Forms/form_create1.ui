@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Form1</class>
+ <widget class="QWidget" name="Form1">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(&quot;/home/dis/Загрузки/background/forest5.jpg&quot;) 0 0 0 0 stretch stretch</string>
+    <string notr="true">border-image: url(&quot;/home/dis/Документы/sharag/sh3_2/мдк 02/kod/dnd/picture/forest5.jpg&quot;) 0 0 0 0 stretch stretch</string>
    </property>
    <property name="text">
     <string/>
@@ -51,9 +51,9 @@ border-radius: 145px;</string>
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>160</y>
-     <width>571</width>
-     <height>731</height>
+     <y>270</y>
+     <width>681</width>
+     <height>601</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -241,10 +241,10 @@ opacity: 0.5;</string>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>250</y>
-     <width>421</width>
-     <height>571</height>
+     <x>260</x>
+     <y>210</y>
+     <width>571</width>
+     <height>641</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -299,6 +299,27 @@ font: 500 italic 18pt &quot;Z003 [urw]&quot;;
    </property>
    <property name="text">
     <string>Список музыкальных произведений</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>180</y>
+     <width>681</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+color: rgb(14, 4, 5);
+font: 500 italic 20pt &quot;Z003 [urw]&quot;;
+background-color: rgba(193, 204, 178, 195);
+border-radius: 5px;
+opacity: 0.5;</string>
+   </property>
+   <property name="placeholderText">
+    <string>Введите название игры...</string>
    </property>
   </widget>
  </widget>

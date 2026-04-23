@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Vxod</class>
+ <widget class="QWidget" name="Vxod">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -38,13 +38,13 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(&quot;/home/dis/Загрузки/background/forest1.jpg&quot;) 0 0 0 0 stretch stretch</string>
+    <string notr="true">border-image: url(&quot;/home/dis/Документы/sharag/sh3_2/мдк 02/kod/dnd/picture/forest1.jpg&quot;) 0 0 0 0 stretch stretch</string>
    </property>
    <property name="text">
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btm_prodolj">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -65,7 +65,7 @@ font: 500 italic 20pt &quot;Z003 [urw]&quot;;</string>
     <string>Продолжить</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btm_new_sessia">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -86,7 +86,7 @@ color: rgb(151, 202, 171);</string>
     <string>Новая сессия</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="btm_exit">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -107,7 +107,7 @@ color: rgb(151, 202, 171);</string>
     <string>Выход</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="btm_zagruz_sessiu">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -147,10 +147,10 @@ border-radius: 25px;</string>
   </widget>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_4</zorder>
-  <zorder>pushButton_3</zorder>
+  <zorder>btm_prodolj</zorder>
+  <zorder>btm_new_sessia</zorder>
+  <zorder>btm_zagruz_sessiu</zorder>
+  <zorder>btm_exit</zorder>
  </widget>
  <resources/>
  <connections/>
