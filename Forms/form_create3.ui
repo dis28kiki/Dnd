@@ -80,8 +80,8 @@ opacity: 0.5;</string>
   <widget class="QPushButton" name="ptm_del_kvest">
    <property name="geometry">
     <rect>
-     <x>1360</x>
-     <y>830</y>
+     <x>1350</x>
+     <y>510</y>
      <width>390</width>
      <height>40</height>
     </rect>
@@ -101,7 +101,7 @@ opacity: 0.5;</string>
    <property name="geometry">
     <rect>
      <x>950</x>
-     <y>830</y>
+     <y>510</y>
      <width>390</width>
      <height>40</height>
     </rect>
@@ -270,8 +270,8 @@ font: 500 italic 18pt &quot;Z003 [urw]&quot;;
   <widget class="QPushButton" name="btm_add_kvest_2">
    <property name="geometry">
     <rect>
-     <x>950</x>
-     <y>510</y>
+     <x>960</x>
+     <y>830</y>
      <width>390</width>
      <height>40</height>
     </rect>
@@ -291,7 +291,7 @@ opacity: 0.5;</string>
    <property name="geometry">
     <rect>
      <x>1360</x>
-     <y>510</y>
+     <y>830</y>
      <width>390</width>
      <height>40</height>
     </rect>

@@ -86,7 +86,7 @@ class Ui_Form3(object):
         self.label_3.setWordWrap(True)
         self.ptm_del_kvest = QPushButton(Form3)
         self.ptm_del_kvest.setObjectName("ptm_del_kvest")
-        self.ptm_del_kvest.setGeometry(QRect(1360, 830, 390, 40))
+        self.ptm_del_kvest.setGeometry(QRect(1350, 510, 390, 40))
         self.ptm_del_kvest.setStyleSheet(
             "color: rgb(188, 197, 163);\n"
             'font: 500 italic 20pt "Z003 [urw]";\n'
@@ -96,7 +96,7 @@ class Ui_Form3(object):
         )
         self.btm_add_kvest = QPushButton(Form3)
         self.btm_add_kvest.setObjectName("btm_add_kvest")
-        self.btm_add_kvest.setGeometry(QRect(950, 830, 390, 40))
+        self.btm_add_kvest.setGeometry(QRect(950, 510, 390, 40))
         self.btm_add_kvest.setStyleSheet(
             "color: rgb(188, 197, 163);\n"
             'font: 500 italic 20pt "Z003 [urw]";\n'
@@ -173,7 +173,7 @@ class Ui_Form3(object):
         self.label_9.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.btm_add_kvest_2 = QPushButton(Form3)
         self.btm_add_kvest_2.setObjectName("btm_add_kvest_2")
-        self.btm_add_kvest_2.setGeometry(QRect(950, 510, 390, 40))
+        self.btm_add_kvest_2.setGeometry(QRect(960, 830, 390, 40))
         self.btm_add_kvest_2.setStyleSheet(
             "color: rgb(188, 197, 163);\n"
             'font: 500 italic 20pt "Z003 [urw]";\n'
@@ -183,7 +183,7 @@ class Ui_Form3(object):
         )
         self.ptm_del_kvest_2 = QPushButton(Form3)
         self.ptm_del_kvest_2.setObjectName("ptm_del_kvest_2")
-        self.ptm_del_kvest_2.setGeometry(QRect(1360, 510, 390, 40))
+        self.ptm_del_kvest_2.setGeometry(QRect(1360, 830, 390, 40))
         self.ptm_del_kvest_2.setStyleSheet(
             "color: rgb(188, 197, 163);\n"
             'font: 500 italic 20pt "Z003 [urw]";\n'
