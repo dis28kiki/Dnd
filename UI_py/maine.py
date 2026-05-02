@@ -148,7 +148,7 @@ class Ui_Form_main(object):
 "")
         self.listWidget_kvests = QListWidget(self.tab_6)
         self.listWidget_kvests.setObjectName(u"listWidget_kvests")
-        self.listWidget_kvests.setGeometry(QRect(20, 70, 941, 211))
+        self.listWidget_kvests.setGeometry(QRect(20, 60, 941, 231))
         self.listWidget_kvests.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
@@ -253,7 +253,7 @@ class Ui_Form_main(object):
         self.tab_9.setObjectName(u"tab_9")
         self.listWidget_predmet = QListWidget(self.tab_9)
         self.listWidget_predmet.setObjectName(u"listWidget_predmet")
-        self.listWidget_predmet.setGeometry(QRect(20, 60, 941, 221))
+        self.listWidget_predmet.setGeometry(QRect(20, 60, 941, 231))
         self.listWidget_predmet.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
@@ -262,7 +262,7 @@ class Ui_Form_main(object):
 "")
         self.textEdit = QTextEdit(self.tab_9)
         self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setGeometry(QRect(20, 300, 941, 701))
+        self.textEdit.setGeometry(QRect(20, 300, 941, 651))
         self.textEdit.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
@@ -281,6 +281,15 @@ class Ui_Form_main(object):
         self.btm_add_4.setObjectName(u"btm_add_4")
         self.btm_add_4.setGeometry(QRect(20, 10, 461, 40))
         self.btm_add_4.setStyleSheet(u"color: rgb(197, 212, 141);\n"
+"font: 500 italic 20pt \"Z003 [urw]\";\n"
+"border-radius: 5px;\n"
+"opacity: 0.5;\n"
+"background-color: rgba(125, 121, 54,90);\n"
+"")
+        self.btm_save_predmet = QPushButton(self.tab_9)
+        self.btm_save_predmet.setObjectName(u"btm_save_predmet")
+        self.btm_save_predmet.setGeometry(QRect(20, 960, 941, 40))
+        self.btm_save_predmet.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
 "opacity: 0.5;\n"
@@ -332,7 +341,7 @@ class Ui_Form_main(object):
 "background-color: rgba(125, 121, 54,90);")
         self.listWidget_zametki = QListWidget(self.tab_11)
         self.listWidget_zametki.setObjectName(u"listWidget_zametki")
-        self.listWidget_zametki.setGeometry(QRect(20, 60, 941, 221))
+        self.listWidget_zametki.setGeometry(QRect(20, 70, 941, 221))
         self.listWidget_zametki.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
@@ -341,7 +350,7 @@ class Ui_Form_main(object):
 "")
         self.btm_del_6 = QPushButton(self.tab_11)
         self.btm_del_6.setObjectName(u"btm_del_6")
-        self.btm_del_6.setGeometry(QRect(490, 10, 471, 40))
+        self.btm_del_6.setGeometry(QRect(490, 20, 471, 40))
         self.btm_del_6.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
@@ -350,7 +359,7 @@ class Ui_Form_main(object):
 "")
         self.btm_add_6 = QPushButton(self.tab_11)
         self.btm_add_6.setObjectName(u"btm_add_6")
-        self.btm_add_6.setGeometry(QRect(20, 10, 461, 40))
+        self.btm_add_6.setGeometry(QRect(20, 20, 461, 40))
         self.btm_add_6.setStyleSheet(u"color: rgb(197, 212, 141);\n"
 "font: 500 italic 20pt \"Z003 [urw]\";\n"
 "border-radius: 5px;\n"
@@ -525,7 +534,7 @@ class Ui_Form_main(object):
 
         self.retranslateUi(Form_main)
 
-        self.tabWidget_predmets.setCurrentIndex(0)
+        self.tabWidget_predmets.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(Form_main)
@@ -556,6 +565,7 @@ class Ui_Form_main(object):
         self.tabWidget_predmets.setTabText(self.tabWidget_predmets.indexOf(self.tab_8), QCoreApplication.translate("Form_main", u"\u041d\u041f\u0421", None))
         self.btm_del_4.setText(QCoreApplication.translate("Form_main", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
         self.btm_add_4.setText(QCoreApplication.translate("Form_main", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))
+        self.btm_save_predmet.setText(QCoreApplication.translate("Form_main", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
         self.tabWidget_predmets.setTabText(self.tabWidget_predmets.indexOf(self.tab_9), QCoreApplication.translate("Form_main", u"\u041f\u0440\u0435\u0434\u043c\u0435\u0442\u044b", None))
         self.btm_del_5.setText(QCoreApplication.translate("Form_main", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c", None))
         self.btm_add_5.setText(QCoreApplication.translate("Form_main", u"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c", None))

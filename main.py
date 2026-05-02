@@ -394,6 +394,26 @@ class MainWindow(QMainWindow):
 
         self.main_ui.btm_redact.clicked.connect(self.toggle_story_edit)
 
+        self.main_ui.btm_add_6.clicked.connect(self.add_note_main)  # Добавить
+        self.main_ui.btm_del_6.clicked.connect(self.delete_note)  # Удалить
+        self.main_ui.btm_del_7.clicked.connect(self.save_note)  # Сохранить
+        self.main_ui.listWidget_zametki.itemClicked.connect(self.on_note_selected)
+
+        self.main_ui.btm_add_4.clicked.connect(self.add_item_main)  # Добавить
+        self.main_ui.btm_del_4.clicked.connect(self.delete_item)  # Удалить
+        self.main_ui.btm_save_predmet.clicked.connect(self.save_item)  # Сохранить
+        self.main_ui.listWidget_predmet.itemClicked.connect(
+            self.on_item_selected
+        )  # Выбор предмета
+        self.main_ui.btm_add.clicked.connect(self.add_quest)  # Добавить
+        self.main_ui.btm_del.clicked.connect(self.delete_quest)  # Удалить
+        self.main_ui.btm_redact_2.clicked.connect(
+            self.save_quest
+        )  # Сохранить (редактировать)
+        self.main_ui.listWidget_kvests.itemClicked.connect(
+            self.on_quest_selected
+        )  # Выбор квеста
+
     def exit_(self):
         QApplication.quit()
 
@@ -1531,6 +1551,9 @@ class MainWindow(QMainWindow):
                     self.main_ui.list_players.addItem(player[0])
 
             print(f"✓ Данные загружены в главное окно")
+            self.load_notes()
+            self.load_items()
+            self.load_quests()
 
         except Exception as e:
             print(f"❌ Ошибка загрузки в главное окно: {e}")
@@ -1807,6 +1830,401 @@ class MainWindow(QMainWindow):
             button.setText("Редактировать")
 
             QMessageBox.information(self, "Готово", "Сюжет сохранён!")
+
+    def load_notes(self):
+        """Загружает заметки из БД в список"""
+        if not self.current_session_id:
+            return
+
+        self.main_ui.listWidget_zametki.clear()
+
+        query = """
+            SELECT id, description
+            FROM notes
+            WHERE session_id = %s
+            ORDER BY id DESC
+        """
+        self.db.execute(query, (self.current_session_id,))
+        notes = self.db.fetchall()
+
+        for note_id, text in notes:
+            # Обрезаем текст для отображения в списке
+            display_text = text[:80] + "..." if len(text) > 80 else text
+            item = QListWidgetItem(display_text)
+            item.setData(Qt.UserRole, note_id)
+            item.setToolTip(text)  # Полный текст при наведении
+            self.main_ui.listWidget_zametki.addItem(item)
+
+        print(f"✓ Загружено {len(notes)} заметок")
+
+    def on_note_selected(self):
+        """При выборе заметки из списка - показывает её текст в поле редактирования"""
+        item = self.main_ui.listWidget_zametki.currentItem()
+        if not item:
+            return
+
+        note_id = item.data(Qt.UserRole)
+
+        # Получаем полный текст заметки из БД
+        query = "SELECT description FROM notes WHERE id = %s"
+        self.db.execute(query, (note_id,))
+        result = self.db.fetchone()
+
+        if result:
+            self.main_ui.textEdit_zametki.setText(result[0])
+            # Сохраняем ID текущей заметки для редактирования
+            self.current_note_id = note_id
+
+    def add_note_main(self):
+        """Добавляет новую заметку"""
+        text = self.main_ui.textEdit_zametki.toPlainText().strip()
+
+        if not text:
+            QMessageBox.warning(self, "Ошибка", "Введите текст заметки!")
+            return
+
+        if not self.current_session_id:
+            QMessageBox.warning(self, "Ошибка", "Нет активной сессии!")
+            return
+
+        query = """
+            INSERT INTO notes (description, session_id)
+            VALUES (%s, %s)
+            RETURNING id
+        """
+        self.db.execute(query, (text, self.current_session_id))
+        note_id = self.db.fetchone()[0]
+
+        # Очищаем поле ввода
+        self.main_ui.textEdit_zametki.clear()
+
+        # Перезагружаем список заметок
+        self.load_notes()
+
+        # Сбрасываем текущий ID заметки
+        self.current_note_id = None
+
+        QMessageBox.information(self, "Успех", "Заметка добавлена!")
+
+    def save_note(self):
+        """Сохраняет изменения текущей заметки"""
+        if not hasattr(self, "current_note_id") or not self.current_note_id:
+            QMessageBox.warning(self, "Ошибка", "Выберите заметку для сохранения!")
+            return
+
+        new_text = self.main_ui.textEdit_zametki.toPlainText().strip()
+
+        if not new_text:
+            QMessageBox.warning(self, "Ошибка", "Заметка не может быть пустой!")
+            return
+
+        query = """
+            UPDATE notes
+            SET description = %s
+            WHERE id = %s
+        """
+        self.db.execute(query, (new_text, self.current_note_id))
+
+        # Перезагружаем список
+        self.load_notes()
+
+        QMessageBox.information(self, "Успех", "Заметка сохранена!")
+
+    def delete_note(self):
+        """Удаляет выбранную заметку"""
+        item = self.main_ui.listWidget_zametki.currentItem()
+        if not item:
+            QMessageBox.warning(self, "Ошибка", "Выберите заметку для удаления!")
+            return
+
+        note_id = item.data(Qt.UserRole)
+
+        # Подтверждение удаления
+        reply = QMessageBox.question(
+            self,
+            "Подтверждение удаления",
+            "Вы уверены, что хотите удалить эту заметку?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+
+        if reply == QMessageBox.Yes:
+            query = "DELETE FROM notes WHERE id = %s"
+            self.db.execute(query, (note_id,))
+
+            # Очищаем поле редактирования
+            self.main_ui.textEdit_zametki.clear()
+
+            # Перезагружаем список
+            self.load_notes()
+
+            # Сбрасываем текущий ID
+            self.current_note_id = None
+
+            QMessageBox.information(self, "Успех", "Заметка удалена!")
+
+    def load_items(self):
+        """Загружает предметы из БД в список"""
+        if not self.current_session_id:
+            return
+
+        self.main_ui.listWidget_predmet.clear()
+
+        query = """
+            SELECT id, name
+            FROM items
+            ORDER BY name
+        """
+        self.db.execute(query)
+        items = self.db.fetchall()
+
+        for item_id, name in items:
+            display_text = f"{name}"
+            item = QListWidgetItem(display_text)
+            item.setData(Qt.UserRole, item_id)
+            item.setToolTip(name)
+            self.main_ui.listWidget_predmet.addItem(item)
+
+        print(f"✓ Загружено {len(items)} предметов")
+
+    def on_item_selected(self):
+        """При выборе предмета из списка - показывает название в поле редактирования"""
+        item = self.main_ui.listWidget_predmet.currentItem()
+        if not item:
+            return
+
+        item_id = item.data(Qt.UserRole)
+
+        # Получаем название предмета из БД
+        query = "SELECT name FROM items WHERE id = %s"
+        self.db.execute(query, (item_id,))
+        result = self.db.fetchone()
+
+        if result:
+            self.main_ui.textEdit.setText(
+                result[0]
+            )  # textEdit - поле для ввода названия предмета
+            self.current_item_id = item_id
+
+    def add_item_main(self):
+        """Добавляет новый предмет"""
+        item_name = self.main_ui.textEdit.toPlainText().strip()
+
+        if not item_name:
+            QMessageBox.warning(self, "Ошибка", "Введите название предмета!")
+            return
+
+        query = """
+            INSERT INTO items (name, description)
+            VALUES (%s, %s)
+            RETURNING id
+        """
+        self.db.execute(query, (item_name, None))
+
+        # Очищаем поле ввода
+        self.main_ui.textEdit.clear()
+
+        # Перезагружаем список предметов
+        self.load_items()
+
+        # Сбрасываем текущий ID
+        self.current_item_id = None
+
+        QMessageBox.information(self, "Успех", "Предмет добавлен!")
+
+    def save_item(self):
+        """Сохраняет изменения текущего предмета"""
+        if not hasattr(self, "current_item_id") or not self.current_item_id:
+            QMessageBox.warning(self, "Ошибка", "Выберите предмет для сохранения!")
+            return
+
+        new_name = self.main_ui.textEdit.toPlainText().strip()
+
+        if not new_name:
+            QMessageBox.warning(
+                self, "Ошибка", "Название предмета не может быть пустым!"
+            )
+            return
+
+        query = """
+            UPDATE items
+            SET name = %s
+            WHERE id = %s
+        """
+        self.db.execute(query, (new_name, self.current_item_id))
+
+        # Перезагружаем список
+        self.load_items()
+
+        QMessageBox.information(self, "Успех", "Предмет сохранен!")
+
+    def delete_item(self):
+        """Удаляет выбранный предмет"""
+        item = self.main_ui.listWidget_predmet.currentItem()
+        if not item:
+            QMessageBox.warning(self, "Ошибка", "Выберите предмет для удаления!")
+            return
+
+        item_id = item.data(Qt.UserRole)
+        item_name = item.text().replace("", "")
+
+        # Подтверждение удаления
+        reply = QMessageBox.question(
+            self,
+            "Подтверждение удаления",
+            f"Вы уверены, что хотите удалить предмет '{item_name}'?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+
+        if reply == QMessageBox.Yes:
+            query = "DELETE FROM items WHERE id = %s"
+            self.db.execute(query, (item_id,))
+
+            # Очищаем поле редактирования
+            self.main_ui.textEdit.clear()
+
+            # Перезагружаем список
+            self.load_items()
+
+            # Сбрасываем текущий ID
+            self.current_item_id = None
+
+            QMessageBox.information(self, "Успех", "Предмет удален!")
+
+    def load_quests(self):
+        """Загружает квесты из БД в список"""
+        if not self.current_story_id:
+            return
+
+        self.main_ui.listWidget_kvests.clear()
+
+        query = """
+            SELECT id, text
+            FROM quests
+            WHERE story_id = %s
+            ORDER BY id
+        """
+        self.db.execute(query, (self.current_story_id,))
+        quests = self.db.fetchall()
+
+        for quest_id, text in quests:
+            # Обрезаем текст для отображения в списке
+            display_text = text[:80] + "..." if len(text) > 80 else text
+            item = QListWidgetItem(f"{display_text}")
+            item.setData(Qt.UserRole, quest_id)
+            item.setToolTip(text)  # Полный текст при наведении
+            self.main_ui.listWidget_kvests.addItem(item)
+
+        print(f"✓ Загружено {len(quests)} квестов")
+
+    def on_quest_selected(self):
+        """При выборе квеста из списка - показывает его текст в поле редактирования"""
+        item = self.main_ui.listWidget_kvests.currentItem()
+        if not item:
+            return
+
+        quest_id = item.data(Qt.UserRole)
+
+        # Получаем полный текст квеста из БД
+        query = "SELECT text FROM quests WHERE id = %s"
+        self.db.execute(query, (quest_id,))
+        result = self.db.fetchone()
+
+        if result:
+            self.main_ui.textEdit_kvests.setText(result[0])
+            self.current_quest_id = quest_id
+
+    def add_quest(self):
+        """Добавляет новый квест"""
+        quest_text = self.main_ui.textEdit_kvests.toPlainText().strip()
+
+        if not quest_text:
+            QMessageBox.warning(self, "Ошибка", "Введите текст квеста!")
+            return
+
+        if not self.current_story_id:
+            QMessageBox.warning(
+                self, "Ошибка", "Нет основного сюжета! Сначала создайте сессию."
+            )
+            return
+
+        query = """
+            INSERT INTO quests (text, story_id)
+            VALUES (%s, %s)
+            RETURNING id
+        """
+        self.db.execute(query, (quest_text, self.current_story_id))
+
+        # Очищаем поле ввода
+        self.main_ui.textEdit_kvests.clear()
+
+        # Перезагружаем список квестов
+        self.load_quests()
+
+        # Сбрасываем текущий ID
+        self.current_quest_id = None
+
+        QMessageBox.information(self, "Успех", "Квест добавлен!")
+
+    def save_quest(self):
+        """Сохраняет изменения текущего квеста"""
+        if not hasattr(self, "current_quest_id") or not self.current_quest_id:
+            QMessageBox.warning(self, "Ошибка", "Выберите квест для сохранения!")
+            return
+
+        new_text = self.main_ui.textEdit_kvests.toPlainText().strip()
+
+        if not new_text:
+            QMessageBox.warning(self, "Ошибка", "Текст квеста не может быть пустым!")
+            return
+
+        query = """
+            UPDATE quests
+            SET text = %s
+            WHERE id = %s
+        """
+        self.db.execute(query, (new_text, self.current_quest_id))
+
+        # Перезагружаем список
+        self.load_quests()
+
+        QMessageBox.information(self, "Успех", "Квест сохранен!")
+
+    def delete_quest(self):
+        """Удаляет выбранный квест"""
+        item = self.main_ui.listWidget_kvests.currentItem()
+        if not item:
+            QMessageBox.warning(self, "Ошибка", "Выберите квест для удаления!")
+            return
+
+        quest_id = item.data(Qt.UserRole)
+        quest_text = item.toolTip()
+        short_text = quest_text[:50] + "..." if len(quest_text) > 50 else quest_text
+
+        # Подтверждение удаления
+        reply = QMessageBox.question(
+            self,
+            "Подтверждение удаления",
+            f"Вы уверены, что хотите удалить квест?\n\n{short_text}",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+
+        if reply == QMessageBox.Yes:
+            query = "DELETE FROM quests WHERE id = %s"
+            self.db.execute(query, (quest_id,))
+
+            # Очищаем поле редактирования
+            self.main_ui.textEdit_kvests.clear()
+
+            # Перезагружаем список
+            self.load_quests()
+
+            # Сбрасываем текущий ID
+            self.current_quest_id = None
+
+            QMessageBox.information(self, "Успех", "Квест удален!")
 
 
 if __name__ == "__main__":
